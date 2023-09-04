@@ -1,0 +1,124 @@
+{
+    "height": 30, // Waybar height (to be removed for auto height)
+    "layer": "top", // Waybar at top layer
+    "margin-top": 0,
+    "margin-left": 0,
+    "margin-bottom": 0,
+    "margin-right": 0,
+    //"spacing": 3, // Gaps between modules (4px)
+    "modules-left": ["custom/launcher", "cpu", "memory", "wlr/workspaces"],
+    "modules-center": ["clock"],
+    "modules-right": [ "custom/weather","tray", "network", "pulseaudio", "backlight", "battery",  "custom/fast-control-menu", "custom/power-menu"],
+    "wlr/workspaces": {
+    "format": "{icon}",
+      "on-click": "activate",
+      "format-icons": {
+        "active": " 󰮯",
+        "default": "",
+      }
+    },
+    "hyprland/window": {
+        "format": "{}"
+    },
+    "tray": {
+        "spacing": 10
+    },
+    "clock": {
+        "format": "{:%H:%M}",
+        "on-click": "~/.config/rofi/music/music",
+    },
+
+    "cpu": {
+      "interval": 10,
+      "format": " {}%",
+      "max-length": 10,
+      "on-click": "",
+    },
+    "memory": {
+        "interval": 30,
+        "format": " {}%",
+        "format-alt":" {used:0.1f}G",
+        "max-length": 10,
+    },
+    "backlight": {
+        "device": "eDP-1",
+        "format": "{icon}",
+        "tooltip-format": "{percent}%",
+        "format-icons": ["󱩎 ", "󱩏 ", "󱩐 ", "󱩑 ", "󱩒 ", "󱩓 ", "󱩔 ", "󱩕 ", "󱩖 ", "󰛨 "],
+
+    },
+    "network": {
+        /* "format-wifi": "直", */
+        "format-wifi": "{icon}",
+        "format-ethernet": " ",
+        "format-disconnected": "睊",
+        "tooltip-format": "{essid}",
+        "on-click": "wezterm -e nmtui",
+        "format-icons": ["󰤯 ","󰤟 ","󰤢 ","󰤥 ","󰤨 "],
+    },
+
+    "pulseaudio": {
+        "format": "{icon}",
+        "format-muted": "婢",
+        "format-icons": {
+            "default": ["", "", "墳"]
+        },
+        "tooltip-format": "{volume}%",
+        "on-click": "pavucontrol &"
+    },
+
+    "bluetooth": {
+        "on-click": "~/.config/waybar/scripts/rofi-bluetooth &",
+        "format": " {status}",
+    },
+
+    "battery": {
+      "bat": "BAT0",
+      "adapter": "ADP0",
+      "interval": 60,
+      "states": {
+          "warning": 30,
+          "critical": 15
+      },
+      "max-length": 20,
+      "format": "{icon} ",
+      "format-warning": "{icon}",
+      "format-critical": "{icon}",
+      "format-charging": "<span font-family='Font Awesome 6 Free'></span>",
+      "format-plugged": "󰂄", 
+
+      "format-alt": "{icon} {time}",
+      "format-full": "󰂄", 
+      "tooltip-format": "{capacity}%",
+      "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
+    },
+    "custom/weather": {
+      "exec": "python3 ~/.config/waybar/scripts/weather.py",
+      "restart-interval": 300,
+      "return-type": "json",
+      "on-click": "xdg-open https://weather.com/en-IN/weather/today/l/93cd6bbff9eb3271284e8e9a3d2f943e8c208f26bf7daf00fb29b7bbc767d424"
+    },   
+
+   "custom/spotify": {
+    "exec": "python3 ~/.config/waybar/scripts/mediaplayer.py --player spotify",
+    "format": "{}  ",
+    "return-type": "json",
+    "on-click": "playerctl play-pause",
+    "on-double-click-right": "playerctl next",
+    "on-scroll-down": "playerctl previous",
+    },
+    "custom/fast-control-menu": {
+        "format" : "",
+        "on-click": "eww open --toggle control-center -c ~/.config/eww/fast-control-menu",   
+     },
+    "custom/power-menu": {
+        "format": " <span color='#6a92d7'>⏻ </span>",
+        "on-click": "bash ~/.config/waybar/scripts/power-menu/powermenu.sh",
+    }, 
+    "custom/launcher": {
+        "format": " <span color='#6a92d7'> </span>",
+        //"format": " <span color='#6a92d7'>🛸 </span>",
+        "on-click": "rofi -show drun",
+    },
+}
+
